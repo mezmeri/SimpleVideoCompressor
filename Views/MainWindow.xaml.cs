@@ -1,4 +1,5 @@
-﻿using SimpleVideoCompressor.Controllers;
+﻿using Microsoft.Win32;
+using SimpleVideoCompressor.Controllers;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,23 +25,25 @@ namespace SimpleVideoCompressor
 
         private void btn_FileUploadUser_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new Microsoft.Win32.OpenFileDialog();
+            OpenFileDialog dialog = new OpenFileDialog();
 
             bool? dialogResult = dialog.ShowDialog();
             if (dialogResult == true)
             {
                 textblock_UserFile.Text = dialog.SafeFileName;
+                controller.UserFilePath = dialog.FileName;
             }
         }
 
         private void btn_FilePathUser_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new Microsoft.Win32.OpenFolderDialog();
+            OpenFolderDialog dialog = new OpenFolderDialog();
 
             bool? dialogResult = dialog.ShowDialog();
             if (dialogResult == true)
             {
                 textblock_UserFilePath.Text = dialog.FolderName;
+                controller.CompressedFileUploadPath = dialog.FolderName;
             }
         }
     }

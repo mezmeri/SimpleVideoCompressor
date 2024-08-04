@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace SimpleEncoder
+namespace SimpleVideoCompressor
 {
     /// <summary>
     /// Interaction logic for App.xaml

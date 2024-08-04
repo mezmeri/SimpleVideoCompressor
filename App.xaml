@@ -1,7 +1,7 @@
-﻿<Application x:Class="SimpleEncoder.App"
+﻿<Application x:Class="SimpleVideoCompressor.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SimpleEncoder"
+             xmlns:local="clr-namespace:SimpleVideoCompressor"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

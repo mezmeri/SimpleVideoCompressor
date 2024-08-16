@@ -46,5 +46,10 @@ namespace SimpleVideoCompressor
                 controller.CompressedFileUploadPath = dialog.FolderName;
             }
         }
+
+        private void btn_StartCompression_Click(object sender, RoutedEventArgs e)
+        {
+            controller.StartCompression();
+        }
     }
 }

@@ -105,7 +105,10 @@
                     <Button
                         x:Name="btn_StartCompression"
                         Grid.Column="2"
-                        Content="Start" />
+                        Content="Start"
+                        Height="20"
+                        VerticalAlignment="Bottom"
+                        Click="btn_StartCompression_Click" />
                     <ProgressBar
                         x:Name="progressbar_CompressionProgress"
                         Grid.Column="0"

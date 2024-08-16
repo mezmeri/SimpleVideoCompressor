@@ -1,15 +1,6 @@
 ﻿using Microsoft.Win32;
 using SimpleVideoCompressor.Controllers;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SimpleVideoCompressor
 {
@@ -23,15 +14,16 @@ namespace SimpleVideoCompressor
             DataContext = controller;
         }
 
-        private void btn_FileUploadUser_Click(object sender, RoutedEventArgs e)
+        private void btn_UploadedFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-
+            dialog.Multiselect = false;
             bool? dialogResult = dialog.ShowDialog();
             if (dialogResult == true)
             {
                 textblock_UserFile.Text = dialog.SafeFileName;
-                controller.UserFilePath = dialog.FileName;
+                controller.FilePathNameUri = System.IO.Path.GetDirectoryName(dialog.FileName);
+                controller.DirectFileName = dialog.SafeFileName;
             }
         }
 
@@ -43,13 +35,33 @@ namespace SimpleVideoCompressor
             if (dialogResult == true)
             {
                 textblock_UserFilePath.Text = dialog.FolderName;
-                controller.CompressedFileUploadPath = dialog.FolderName;
+                controller.UploadPathUri = dialog.FolderName;
             }
         }
 
         private void btn_StartCompression_Click(object sender, RoutedEventArgs e)
         {
+            btn_FilePathUser.IsEnabled = false;
+            btn_FileUploadUser.IsEnabled = false;
+            btn_StartCompression.IsEnabled = false;
             controller.StartCompression();
+
+            if (controller.FileUploadPathUri != null)
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.ShowDialog();
+                dialog.DefaultDirectory = controller.FileUploadPathUri;
+
+                btn_FilePathUser.IsEnabled = true;
+                btn_FileUploadUser.IsEnabled = true;
+                btn_StartCompression.IsEnabled = true;
+
+                textblock_UserFile.Text = "";
+                textblock_UserFilePath.Text = "";
+            } else
+            {
+                MessageBox.Show("An error occured.");
+            }
         }
     }
 }
